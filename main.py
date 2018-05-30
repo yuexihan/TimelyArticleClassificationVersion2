@@ -23,7 +23,7 @@ for file_name in tqdm(os.listdir(folder)):
 f_positive = open('positive.txt', 'w', encoding='utf-8')
 f_negative = open('negative.txt', 'w', encoding='utf-8')
 general_proc = CGeneralProc('kd_content_mining.xml')
-blank = re.compile(r'\w')
+blank = re.compile(r'\s')
 folder = '../data/article_tokens'
 for file_name in tqdm(os.listdir(folder)):
     if file_name.startswith('.'):
