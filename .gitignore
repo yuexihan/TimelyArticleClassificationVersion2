@@ -1,0 +1,14 @@
+__*
+.vs
+.idea
+*.data
+*.bin
+*.txt
+*.vec
+20180514
+20180515
+data
+*.ipynb
+*.pyc
+version2
+*.xml
