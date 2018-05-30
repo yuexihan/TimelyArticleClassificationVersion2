@@ -15,7 +15,7 @@ for file_name in tqdm(os.listdir(folder)):
         try:
             push_time, inner_unique_id, teg_channel, pub_site_name = line.split('\t')
             if push_time and inner_unique_id and teg_channel and pub_site_name:
-                push_time = date.fromtimestamp(push_time)
+                push_time = date.fromtimestamp(int(push_time))
                 article_id_to_info[inner_unique_id] = Article('', channel_name_to_id[teg_channel], push_time, pub_site_name)
         except:
             continue
