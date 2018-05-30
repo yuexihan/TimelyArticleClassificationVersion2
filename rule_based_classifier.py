@@ -73,7 +73,8 @@ class CGeneralProc:
         yesterday = article.push_time - timedelta(1)
         pattern = self.channel_2_pattern[MAGIC_NUM_ALL_CATE]
         for word in pattern.finditer(article.text):
-            if re.match("((\\d+年)?\\d+月)?\\d{1,2}([^0-9月]\\d{1,2})?日", word.group()):
+            word = word.group()
+            if re.match("((\\d+年)?\\d+月)?\\d{1,2}([^0-9月]\\d{1,2})?日", word):
                 bHasIndicateTime = True
                 year = article.push_time.year
                 month = article.push_time.month
