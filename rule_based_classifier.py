@@ -139,7 +139,7 @@ class CGeneralProc:
             word = word[:day_offset] + word[div_offset+1:]
         return word
 
-    def process(self, article: Article):
+    def is_timely(self, article: Article):
         return self.is_content_timely(article) or self.is_account_timely(article)
 
 
