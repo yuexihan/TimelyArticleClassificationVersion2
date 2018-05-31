@@ -9,15 +9,15 @@ flags.DEFINE_integer('word_dimension', 100, 'word dimension')
 flags.DEFINE_integer('pos_wight', 1, 'positive sample weight in LR')
 flags.DEFINE_integer('epoch', 5, 'train epoch')
 flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
-flags.DEFINE_bool('sanity_check', False, 'sanity check')
-flags.DEFING_string('save', 'data/model', 'file to save model')
+flags.DEFINE_bool('sanity', False, 'sanity check')
+flags.DEFINE_string('save', 'data/model', 'file to save model')
 
 FLAGS = flags.FLAGS
 
 
 class CnnMaxPool(object):
     def __init__(self):
-        self.loader = Loader(sanity_check=FLAGS.sanity_check)
+        self.loader = Loader(sanity_check=FLAGS.sanity)
         self.sess = tf.Session()
         self.embedding = tf.constant(self.loader.id2v, dtype=tf.float32)
         self.build_graph()
