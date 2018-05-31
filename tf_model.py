@@ -6,7 +6,7 @@ flags = tf.app.flags
 flags.DEFINE_integer('window', 2, 'cnn1d word window size')
 flags.DEFINE_integer('channel', 256, 'channel dimension')
 flags.DEFINE_integer('word_dimension', 100, 'word dimension')
-flags.DEFINE_integer('pos_wight', 1, 'positive sample weight in LR')
+flags.DEFINE_integer('pos_weight', 1, 'positive sample weight in LR')
 flags.DEFINE_integer('epoch', 5, 'train epoch')
 flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
 flags.DEFINE_bool('sanity', False, 'sanity check')
