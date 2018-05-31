@@ -35,6 +35,6 @@ if len(inputs) > 0:
     predictions = model.sess.run(model.logits, feed_dict=feed_dict)
     result.extend(predictions)
 
-with open('data/predictions.txt') as f:
+with open('data/predictions.txt', 'w', encoding='utf-8') as f:
     for r in result:
         f.write(str(r) + '\n')
