@@ -20,7 +20,7 @@ class Loader(object):
         id2v = [[0.] * 100]
         f.readline()
         for line in f:
-            line = line.split()
+            line = line.rstrip().split(' ')
             assert len(line) == 101
             w = line[0]
             v = [float(x) for x in line[1:]]
