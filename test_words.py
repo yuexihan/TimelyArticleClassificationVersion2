@@ -1,7 +1,7 @@
 from tf_model import CnnMaxPool, FLAGS
 import tensorflow as tf
 model = CnnMaxPool()
-tf.train.Saver().restore(model.sess, FLAGS.model_file)
+tf.train.Saver().restore(model.sess, FLAGS.save)
 
 result = []
 inputs = []
