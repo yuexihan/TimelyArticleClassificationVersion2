@@ -30,11 +30,11 @@ class CnnMaxPool(object):
         with tf.variable_scope('cnn') as scope:
             try:
                 conv_W = tf.get_variable(name='conv_W', shape=(FLAGS.window, FLAGS.word_dimension, FLAGS.channel))
-                conv_b = tf.get_variable(name='conv_b', shape=FLAGS.channel_1, initializer=tf.zeros_initializer())
+                conv_b = tf.get_variable(name='conv_b', shape=FLAGS.channel, initializer=tf.zeros_initializer())
             except ValueError:
                 scope.reuse_variables()
                 conv_W = tf.get_variable(name='conv_W', shape=(FLAGS.window, FLAGS.word_dimension, FLAGS.channel))
-                conv_b = tf.get_variable(name='conv_b', shape=FLAGS.channel_1, initializer=tf.zeros_initializer())
+                conv_b = tf.get_variable(name='conv_b', shape=FLAGS.channel, initializer=tf.zeros_initializer())
 
             conv = tf.sigmoid(tf.nn.conv1d(inputs, conv_W, 1, 'SAME') + conv_b)
 

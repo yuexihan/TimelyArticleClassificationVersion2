@@ -15,7 +15,7 @@ class Loader(object):
         print('finish initialize data loader')
 
     def load_word_vector(self):
-        f = open('data/words_100.vec', 'rb')
+        f = open('data/words_100.vec', encoding='utf-8')
         w2id = {'<UNKNOWN>': 0}
         id2v = [[0.] * 100]
         f.readline()
@@ -32,10 +32,10 @@ class Loader(object):
         return w2id, id2v
 
     def load_data(self, file_name, label):
-        f = open(file_name, 'rb')
+        f = open(file_name, encoding='utf-8')
         data = []
         for line in f:
-            _, rest = line.split(b'\t', 1)
+            _, rest = line.split('\t', 1)
             words = rest.split()[:500]
             vectors = []
             for w in words:
