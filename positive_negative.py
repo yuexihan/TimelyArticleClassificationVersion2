@@ -6,7 +6,7 @@ from datetime import date
 import re
 
 article_id_to_info = {}
-folder = '../data/article_info'
+folder = 'article_info'
 for file_name in tqdm(os.listdir(folder)):
     if file_name.startswith('.'):
         continue
@@ -24,7 +24,7 @@ f_positive = open('positive.txt', 'w', encoding='utf-8')
 f_negative = open('negative.txt', 'w', encoding='utf-8')
 general_proc = CGeneralProc('kd_content_mining.xml')
 blank = re.compile(r'\s')
-folder = '../data/article_tokens'
+folder = 'article_tokens'
 for file_name in tqdm(os.listdir(folder)):
     if file_name.startswith('.'):
         continue
