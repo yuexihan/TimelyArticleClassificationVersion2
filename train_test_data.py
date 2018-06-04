@@ -9,7 +9,7 @@ for line in f_p:
     if len(line.split()) < 50:
         continue
     lines.append(line)
-    if len(lines) == 84:
+    if len(lines) == 63:
         random.shuffle(lines)
         for x in lines[:8]:
             f_p_train.write(x)
@@ -34,7 +34,7 @@ for line in f_n:
     if len(line.split()) < 50:
         continue
     lines.append(line)
-    if len(lines) == 179:
+    if len(lines) == 144:
         random.shuffle(lines)
         for x in lines[:8]:
             f_n_train.write(x)
