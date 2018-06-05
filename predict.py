@@ -59,6 +59,6 @@ for file_name in tqdm(os.listdir(folder)):
             }
             predictions = model.sess.run(model.logits, feed_dict=feed_dict)
             score = predictions[0]
-            writer.writerow([inner_id, article.channel_id, article.author. article.push_time, positive, score])
+            writer.writerow([inner_id, article.channel_id, article.author, article.push_time, positive, score])
 
 
