@@ -33,6 +33,12 @@ writer = csv.writer(f_output, delimiter='\t')
 blank = re.compile(r'\s')
 folder = 'article_tokens_new'
 writer.writerow(['docid', 'cid', 'author', 'time', 'positive', 'score'])
+
+articles = []
+inputs = []
+lens = []
+positives = []
+docids = []
 for file_name in tqdm(os.listdir(folder)):
     if file_name.startswith('.'):
         continue
@@ -43,9 +49,9 @@ for file_name in tqdm(os.listdir(folder)):
             article = article_id_to_info[inner_id]
             article.text = blank.sub('', rest)
             if general_proc.is_timely(article):
-                positive = 1
+                positives.append(1)
             else:
-                positive = -1
+                positives.append(-1)
             words = rest.split()[:500]
             vector = []
             for w in words:
@@ -53,12 +59,32 @@ for file_name in tqdm(os.listdir(folder)):
                     vector.append(loader.w2id[w])
                 else:
                     vector.append(0)
-            feed_dict = {
-                model.inputs: [vector],
-                model.lens: [len(vector)],
-            }
-            predictions = model.sess.run(model.logits, feed_dict=feed_dict)
-            score = predictions[0]
+            inputs.append(vector)
+            lens.append(len(vector))
+            articles.append(article)
+            docids.append(inner_id)
+            if len(inputs) >= 128:
+                max_len = max(lens)
+                loader.padding(inputs, max_len)
+                feed_dict = {
+                    model.inputs: inputs,
+                    model.lens: lens,
+                }
+                predictions = model.sess.run(model.logits, feed_dict=feed_dict)
+                for article, positive, score, inner_id in zip(articles, positives, predictions, docids):
+                    writer.writerow([inner_id, article.channel_id, article.author, article.push_time, positive, score])
+                articles = []
+                positives = []
+                inputs = []
+                lens = []
+                docids = []
+    if len(inputs) > 0:
+        max_len = max(lens)
+        loader.padding(inputs, max_len)
+        feed_dict = {
+            model.inputs: inputs,
+            model.lens: lens,
+        }
+        predictions = model.sess.run(model.logits, feed_dict=feed_dict)
+        for article, positive, score, inner_id in zip(articles, positives, predictions, docids):
             writer.writerow([inner_id, article.channel_id, article.author, article.push_time, positive, score])
-
-
